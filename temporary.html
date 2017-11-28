@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title data-i18n="[html]temporary_page.title">Site não publicado</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+
+    <link href="//fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="//static.umbler.com/umbootstrap/themes/umbler-app/dist/css/theme.min.css">
+    <link href="//static.umbler.com/umbler/errorpages/error-pages-v2.css" rel="stylesheet">
+</head>
+
+<body class="page-status wrapper bg-primary">
+    <div class="content">
+        <div class="container">
+            <header data-i18n="[html]temporary_page.header" class="mt-5">
+                <h1 class="display-4 text-xs-center mb-4 font-light text-white mb-4">O site <strong id="site">dominiodaempresa.com</strong> não foi publicado até o momento</h1>
+            </header>
+            <div class="flex-xs flex-xs-center">
+                <div class="col-md-9 col-lg-6">
+                    <div data-i18n="[html]temporary_page.description" class="mb-4">
+                        <p class="h3 text-primary-lighter font-normal">Publicar seu site na Umbler é muito simples! Acesse o tutorial em nossa Central de Ajuda</p>
+                        <a rel="nofollow" href="http://help.umbler.com/hc/pt-br/articles/202385755-Publicando-um-site-FTPS" class="btn btn-success btn-lg mt-2">Como publicar meu site?</a>
+                    </div>
+                    <div data-i18n="[html]temporary_page.help" class="alert alert-info text-xs-left">
+                        Não esqueça que a Umbler também oferece as opções de deploy via <a href="//blog.umbler.com/br/deploy-de-aplicacoes-via-git/" class="text-underline" target="_blank">Git Local</a>, <a href="//blog.umbler.com/br/do-github-a-umbler-em-apenas-um-push/" class="text-underline" target="_blank">GitHub</a> e <a href="//help.umbler.com/hc/pt-br/articles/205613805-Configurando-e-acessando-o-SSH" class="text-underline" target="_blank">SSH</a>, basta verificar as disponibilidades da plataforma que você utiliza no seu próprio painel.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="//www.umbler.com" taget="_blank" rel="nofollow">
+            <svg id="umbler-logo" xmlns="http://www.w3.org/2000/svg" width="100" viewBox="0 0 917.13 251.76"><title>umbler-logo-light-bg</title><path d="M907.75,72.06c-22.43-.19-86.06,2.85-86.06,46.74,0,11.56,0,124.2,0,124.28a9.31,9.31,0,0,0,9.29,8.64h18.65a9.32,9.32,0,0,0,9.32-9.26V129.85c0-7.54.47-22.14,36.66-22.14,4.31,0,6.67-1.25,9.3-4.6a133.7,133.7,0,0,0,10.64-15.58C920.07,80.12,914.11,72.12,907.75,72.06Z" fill="#ffffff"/><path d="M784,201.66c-3.18-3.18-9.6-5-15.07.76a54.35,54.35,0,0,1-78.87-6.53c22-5.44,76-22.17,96.72-39.19,17.22-14.13,25.68-33,8.45-57C779,77,754.88,72.05,732.59,72.05c-.44,0-.88,0-1.32,0a89.43,89.43,0,0,0-55.52,20.28,90.39,90.39,0,0,0-24,30.4,89.83,89.83,0,0,0,80.87,129c14.19,0,37.42-4.68,58.43-21.67l4.94-4.95a8.79,8.79,0,0,0-.43-12Zm-88.09-80c9.68-8.83,23.53-15.31,37.64-15.31,9.39,0,19.42.86,25,7.67,2.93,3.59,2.38,9.64-.33,13.81-9.52,14.65-67.9,29.24-80,31.22A54.33,54.33,0,0,1,695.93,121.67Z" fill="#ffffff"/><path d="M615.71,251.75H598.44a10,10,0,0,1-10-10V10.08a10,10,0,0,1,10-10h17.27a10,10,0,0,1,10,10V241.75A10,10,0,0,1,615.71,251.75Z" fill="#ffffff"/><path d="M571.46,115c0-55.46-55.65-45.79-95.33-33.3V10a10,10,0,0,0-10-10H448.67a10,10,0,0,0-10,10V213.06c0,6.43,3.67,16.71,11.57,21,14.11,7.65,121.22,47.36,121.22-25.27Zm-37.58,76.43c0,7.82-2.94,14.95-9.42,19.57-12.15,8.67-35.09-.88-41.4-4.49-3.52-2-6.94-4.87-6.94-9.14V126.42c0-4.28,3.41-7.13,6.94-9.14,6.31-3.61,29.25-13.16,41.4-4.49,6.48,4.62,9.42,11.75,9.42,19.57Z" fill="#ffffff"/><path d="M126.58,154.6a25.21,25.21,0,0,1-48.2-4.71,24.87,24.87,0,0,1-.42-3.7,7.07,7.07,0,0,0-5.78-6.78l-12-2.12A8,8,0,0,0,50.76,145q0,.12,0,.24a52.4,52.4,0,0,0,101.73,17.68,8,8,0,0,0-6.19-10.45l-12-2.12A7,7,0,0,0,126.58,154.6Z" fill="#fca4ae"/><path d="M356,75.69,324.65,88.52C310.39,62.31,275.71,76,274.7,76.58l-45,16.34c-4,1.2-8.17,6-8.17,12.44V241.71a10,10,0,0,0,10,10H249a10,10,0,0,0,10-10V121.12c0-4.29,3.41-7.16,6.94-9.18,6.31-3.63,19.53-11.16,27.57-5.18,6.39,4.75,9.42,11.8,9.42,19.65V241.71a10,10,0,0,0,10,10h17.46a10,10,0,0,0,10-10V121.12c0-4.29,3.41-7.16,6.93-9.18,6.31-3.63,19.53-11.16,27.57-5.18,6,4.47,9.28,9.82,9.28,16.54V241.71a10,10,0,0,0,10,10h17.46a10,10,0,0,0,10-10V121.12C421.66,97.34,400.81,60.31,356,75.69Z" fill="#ffffff"/><path d="M175.55,112.82A10,10,0,0,0,169.13,124a83.62,83.62,0,0,1,1.25,14.43c0,41.66-30.48,75.43-68.09,75.43S34.2,180.09,34.2,138.44A81,81,0,0,1,45.33,97.09a10,10,0,0,0-1.49-12.24L32.76,73.77a10,10,0,0,0-15.62,1.87A121.57,121.57,0,0,0,0,138.44C0,201,45.8,251.75,102.29,251.75S204.58,201,204.58,138.44a125.5,125.5,0,0,0-2.1-22.94,10,10,0,0,0-13.27-7.65Z" fill="#ffffff"/></svg>
+        </a>
+        <div data-i18n="[html]temporary_page.footer">
+            Se for o administrador do site, <a href="//app.umbler.com/" target="_blank" class="text-white">acesse o painel →</a>
+        </div>
+    </div>
+
+</body>
+
+<script src="//static.umbler.com/umbler/errorpages/jquery-1.8.2.min.js"></script>
+<script src="//static.umbler.com/umbler/errorpages/i18next-1.7.4.min.js"></script>
+<script src="//static.umbler.com/umbler/errorpages/error_page_translate-v2.js"></script>
+</html>
