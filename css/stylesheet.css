@@ -29,7 +29,7 @@ body {
 	transform: rotate(180deg);
 }
 nav {
-	background-color: red
+	background-color: gray;
 }
 .nav-logo{
 	height: 50px;
@@ -38,4 +38,11 @@ nav {
 }
 .navbar-center{
 	align-items: center;
+}
+a {
+	color: white;
+}
+a:hover{
+	text-decoration: none;
+	color: white;
 }
