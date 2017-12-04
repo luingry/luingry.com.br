@@ -17,11 +17,12 @@ body {
 .logo {
     height: 280px;
     margin-bottom: 20px;
+	transition: 1s;
 }
 .texto {
     color: rgba(90, 90, 90, 1);
 }
 .cheat-enabled{
-	transition: 0.5s;
-	transform: rotate(360deg);
+	transition: 1s;
+	transform: rotate(180deg);
 }

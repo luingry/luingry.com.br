@@ -1,3 +1,7 @@
 cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
-  $(".logo").addClass(" cheat-enabled");
+  if($(".logo").hasClass("cheat-enabled")){
+  	$(".logo").removeClass("cheat-enabled");
+  }else{
+  	$(".logo").addClass("cheat-enabled");
+  }
 });
