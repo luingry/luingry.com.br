@@ -19,6 +19,7 @@ body {
     height: 280px;
     margin-bottom: 20px;
 	transition: 1s;
+
 }
 .texto {
     color: rgba(90, 90, 90, 1);
@@ -29,4 +30,12 @@ body {
 }
 nav {
 	background-color: red
+}
+.nav-logo{
+	height: 50px;
+	width: auto;
+	margin: 5px;
+}
+.navbar-center{
+	align-items: center;
 }
