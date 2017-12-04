@@ -1,3 +1,3 @@
 cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
-  alert('Voilà!');
+  $(".logo").addClass(" cheat-enabled");
 });
