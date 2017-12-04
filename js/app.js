@@ -1,7 +1,10 @@
 cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
-  if($(".logo").hasClass("cheat-enabled")){
-  	$(".logo").removeClass("cheat-enabled");
+  if($(".nav-logo").hasClass("cheat-enabled")){
+  	$(".nav-logo").removeClass("cheat-enabled");
+  	$(".secret").removeClass("secret-show")
+
   }else{
-  	$(".logo").addClass("cheat-enabled");
+  	$(".nav-logo").addClass("cheat-enabled");
+  	$(".secret").addClass("secret-show")
   }
 });

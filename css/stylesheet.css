@@ -29,12 +29,13 @@ body {
 	transform: rotate(180deg);
 }
 nav {
-	background-color: rgba(0, 0, 0, 1.95);
+	background-color: rgba(0, 0, 0, 1);
 }
 .nav-logo{
 	height: 50px;
 	width: auto;
 	margin: 5px;
+	transition: 1s;
 }
 .navbar-center{
 	align-items: center;
@@ -56,4 +57,15 @@ a:hover{
 	color: white;
 	transition: 0.10s;
 	background-color: rgba(195, 150, 0, 1);
+}
+.brand a{
+	margin: 0;
+}
+.secret{
+	display:none !important;
+    transition: 1s;
+}
+.secret-show{
+	display: inline-flex !important;
+	transition: 1s;
 }
