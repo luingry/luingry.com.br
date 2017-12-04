@@ -26,3 +26,6 @@ body {
 	transition: 1s;
 	transform: rotate(180deg);
 }
+nav {
+	background-color: red
+}
