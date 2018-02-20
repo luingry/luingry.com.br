@@ -1,15 +1,26 @@
 @keyframes pulse{
     from{
-        transform: scale(1,1);
+        transform: scale(1, 1);
+
     }
     to{
-        transform: scale(1.03, 1.03);
+        transform: scale(1.015, 1.015);
+
+    }
+}
+@keyframes rotate{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(180deg);
     }
 }
 body {
     background-color: rgba(0, 0, 0, 0.95);
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    overflow-x:hidden;
 }
 .corpo {
     position: absolute;
@@ -25,17 +36,27 @@ body {
 }
 .logo {
     height: 280px;
-    margin-bottom: 20px;
-	transition: all 1s ease-in-out;
+    margin: 20px 0;
+    transition: all 1s ease-in-out;
+    animation: pulse 1s infinite alternate;
+    animation-fill-mode: both;
+    
+    
 }
 .pulse {
-    animation: pulse 2s infinite alternate;
-    transition: all 1s ease-in-out;
+
 }
 .texto {
     color: rgba(90, 90, 90, 1);
 }
 .cheat-enabled{
-	transition: all 1s ease-in-out;
-	transform: rotate(180deg);
+    transition: transform 2s ease-in-out;
+    transform: rotate(180deg);
+}
+.cheat-enabled-mobile{
+    transition: transform 2s ease-in-out;
+    transform: rotate(180deg);
+}
+#logo-container{
+    transition: all 1s ease-in-out;
 }
