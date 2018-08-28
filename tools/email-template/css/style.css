@@ -1,0 +1,123 @@
+.fieldset-ids{
+	display: flex;
+	margin-top: 10px; 
+	border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 1%;
+    flex-wrap: wrap;
+
+}
+.fieldset-ids>span{
+	width: 100%;
+	text-align: center;
+}
+.botao-remover{
+	width: 30px;
+	height: 30px;
+	background: gray;
+	position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 10px 10px 0;
+    background: #f2f2f2;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: 0;
+    cursor: pointer;
+}
+.botao-remover:after{
+	content: "x";
+    opacity: 0.2;
+    color: red;
+    font-weight: 700;
+}
+.botao-remover:hover:after{
+	opacity: 1;
+}
+.botao-remover:active{
+	transform: translateY(1px);
+	transition: 0ms;
+	box-shadow: inset 5px 0px 5px -7px black, inset 0 0 0 0 black, inset 0 0 0 0 black, inset 0 0 0 0 black
+}
+.fieldset-ids>.id-produto{
+	display: flex;
+	border-radius: 10px;
+	margin: 1%;
+}
+#id-produto-inserir, #opcoes input{
+	border: 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    width: 90px;
+    text-align: right;
+}
+#id-produto-inserir:focus, #opcoes input:focus{
+	outline: none;
+	border-bottom: 1px solid #5b7eb1
+}
+.imagem-produto{
+	max-height: 200px;
+	display: block;
+	margin: auto;
+}
+.acoes{
+	margin-bottom: 20px;
+}
+.invalido {
+    background-color: rgba(255,0,0,0.3);
+    box-shadow: 0 0 10px red;
+}
+.container-erros{
+	background-color: rgba(255, 0, 0, 0.2);
+    border: 1px solid rgba(255,0 ,0, 0.5);
+    border-radius: 10px;
+    padding: 1%;
+    display: none;
+    position: relative;
+}
+.contem-erros{
+	display: block;
+}
+.close-button{
+    position: absolute;
+    top: -3px;
+    right: 0;
+    padding: 1%;
+    font-weight: 700;
+    color: red;
+    cursor: pointer;
+    opacity: 0.5;
+}
+.container-main{
+	max-width: 1340px;
+	padding: 15px;
+	margin: auto;
+}
+.container-main > *{
+	margin-bottom: 15px;
+}
+div.mais-produtos{
+	display: none;
+}
+input.id-produto{
+    border-radius: 10px 0 0 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 90px;
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.fieldset-ids>div.id-produto:hover{
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+input:focus{
+    border-bottom: 1px;
+	border-color: #5b7eb1;
+}
+input#show-all{
+	display: none;
+}
+*, :after, :before{
+	font-family: sans-serif;
+	transition: 200ms ease-in-out;
+	color: rgb(84, 84, 84);
+}
