@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Criador de html</title>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <link href="css/style.css" rel="stylesheet"></link>
+  <meta charset="UTF-8">
+</head>
+<body>
+	<div class="container-main">
+		<div class="acoes">
+			<button class="gerar">Gerar HTML</button>
+			<button class="remover-todos">Remover todos os produtos</button>
+		</div>
+		<div class="container-erros">
+			<ul></ul>
+			<div class="close-button">x</div>
+		</div>
+		<form id="opcoes">
+			<label for="email-width">Largura do e-mail:</label>
+			<input type="text" id="email-width">
+		</form>
+
+		<form id="produtos">
+			<label for="id-produto-inserir">Insira o ID do produto e tecle enter:</label>
+			<input type="text" id="id-produto-inserir">
+			<p>Produtos selecionados:</p>
+			<div class="fieldset-ids">
+				
+			</div>
+		</form>
+
+		<div class="previa">
+			<table>
+				<tbody>
+					<tr class="cabecalho"></tr>
+					<tr class="produtos"></tr>
+					<tr class="rodape"></tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
