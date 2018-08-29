@@ -17,8 +17,18 @@ $("#produtos").on("click", function(e){
 	if ($(e.target).hasClass("botao-remover")) limpaErros();
 });
 
-
-
+$(".save").on("click", function(e){
+	e.preventDefault();
+	if ($(e.target).hasClass("save")) {
+		salvaInformacoesNasVariaveisLocal()
+	}
+})
+$(".load").on("click", function(e){
+	e.preventDefault();
+	if ($(e.target).hasClass("load")) {
+		carregaUltimasInformacoesSalvas()
+	}
+})
 $(".remover-todos").on("click", function(e){
 	e.preventDefault();
 	$(".fieldset-ids").children().remove();
@@ -229,7 +239,7 @@ function carregaOpcoes(){
 }
 
 function verificaWidth(width){
-	if (width == "" || width == 0 || typeof width == "undefined") return width = 600
+	if (width == "" || width == 0 || typeof width == "undefined" || width == "default") return width = 600
 	else return width;
 
 }
@@ -252,24 +262,33 @@ function adicionaErroAoProdutoBuscado(idbuscado){
 }
 
 function salvaInformacoesNasVariaveisLocal(){
-
+	var products_fetched = [];
+	for (var i = 0; i < $("input.id-produto").length; i++) {
+		products_fetched.push($("input.id-produto")[i].value)
+	}
 	var template = [
 		{
-			"Configurações": {
-			width: $("#email-width").val()
+			"configs": {
+			"width": $("#email-width").val() == 0 ? "default" : $("#email-width").val(),
+			"products_returned": $("div.previa tr.produtos").html(),
+			"products_fetched": products_fetched
 			},
-		},
-		{
-			"Produtos_buscados": "array de produtos buscados aqui"
 		}
 	];
-	console.log(template);
 
 	localStorage.setItem("template_e-mail", JSON.stringify(template));
 }
 
 function carregaUltimasInformacoesSalvas(){
-	var template = JSON.parse(localStorage.getItem("template_e-mail"));
-	console.log(template);
-	$("#email-width").val(template.configuracoes.width);
+	var response = JSON.parse(localStorage.getItem("template_e-mail"))[0];
+	var configs = response.configs;
+	var produtos = response.configs.produtos;
+	var products_fetched = response.configs.products_fetched
+	$("#email-width").val(verificaWidth(configs.width));
+	$(".previa table").css({width: verificaWidth(configs.width), margin: "auto"})
+	$("div.previa tr.produtos").html(produtos)
+	for(var i = 0; i < products_fetched.length; i++){
+		geraCamposId(products_fetched[i])
+	}
+	adicionaOuRemoveTextoNenhumProduto()
 }
