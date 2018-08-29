@@ -268,7 +268,7 @@ function salvaInformacoesNasVariaveisLocal(){
 			"configs": {
 			"width": $("#email-width").val() == 0 ? "default" : $("#email-width").val(),
 			"products_returned": $("div.previa tr.produtos").html(),
-			"products_fetched": $("");
+			"products_fetched": $("")
 			},
 		}
 	];
