@@ -262,13 +262,16 @@ function adicionaErroAoProdutoBuscado(idbuscado){
 }
 
 function salvaInformacoesNasVariaveisLocal(){
-
+	var products_fetched = [];
+	for (var i = 0; i < $("input.id-produto").length; i++) {
+		products_fetched.push($("input.id-produto")[i].value)
+	}
 	var template = [
 		{
 			"configs": {
 			"width": $("#email-width").val() == 0 ? "default" : $("#email-width").val(),
 			"products_returned": $("div.previa tr.produtos").html(),
-			"products_fetched": $("")
+			"products_fetched": products_fetched
 			},
 		}
 	];
@@ -280,7 +283,12 @@ function carregaUltimasInformacoesSalvas(){
 	var response = JSON.parse(localStorage.getItem("template_e-mail"))[0];
 	var configs = response.configs;
 	var produtos = response.configs.produtos;
+	var products_fetched = response.configs.products_fetched
 	$("#email-width").val(verificaWidth(configs.width));
 	$(".previa table").css({width: verificaWidth(configs.width), margin: "auto"})
 	$("div.previa tr.produtos").html(produtos)
+	for(var i = 0; i < products_fetched.length; i++){
+		geraCamposId(products_fetched[i])
+	}
+	adicionaOuRemoveTextoNenhumProduto()
 }

@@ -11,6 +11,24 @@
 	width: 100%;
 	text-align: center;
 }
+.button{
+	display: inline-block;
+    background-color: gray;
+    color: white;
+    font-weight: 700;
+    padding: 0.7em 1.2em;
+    border-radius: 10px;
+    cursor: pointer;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+    user-select: none;
+    transition: 100ms;
+    font-size: 0.8rem;
+}
+.button:active{
+	transition: transform 0ms;
+	transform: translateY(3px);
+	border-bottom: 0px;
+}
 .botao-remover{
 	width: 30px;
 	height: 30px;
@@ -24,6 +42,7 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-left: 0;
     cursor: pointer;
+
 }
 .botao-remover:after{
 	content: "x";
@@ -118,6 +137,6 @@ input#show-all{
 }
 *, :after, :before{
 	font-family: sans-serif;
-	transition: 200ms ease-in-out;
+	transition: 100ms ease-in-out;
 	color: rgb(84, 84, 84);
 }
