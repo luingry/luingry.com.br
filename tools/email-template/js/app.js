@@ -57,7 +57,6 @@ $("#id-produto-inserir").keyup(function(e){
 		var id = this.value;
 		if (id.length > 0) {
 			if (!verificaDuplicatas(id)) geraCamposId(id);
-			else alert("ID repetido")
 			adicionaOuRemoveTextoNenhumProduto()
 
 		}
@@ -140,6 +139,7 @@ function verificaDuplicatas(id){
 		for (var i = 0; i < arrayid.length; i++) {
 			if (arrayid[i] == id) {
 				repetido = true;
+				alert("ID repetido")
 				return repetido;
 				break
 			}
@@ -280,6 +280,8 @@ function salvaInformacoesNasVariaveisLocal(){
 }
 
 function carregaUltimasInformacoesSalvas(){
+	$(".fieldset-ids").html("");
+	limpaErros()
 	var response = JSON.parse(localStorage.getItem("template_e-mail"))[0];
 	var configs = response.configs;
 	var produtos = response.configs.produtos;
@@ -288,7 +290,7 @@ function carregaUltimasInformacoesSalvas(){
 	$(".previa table").css({width: verificaWidth(configs.width), margin: "auto"})
 	$("div.previa tr.produtos").html(produtos)
 	for(var i = 0; i < products_fetched.length; i++){
-		geraCamposId(products_fetched[i])
+		if (!verificaDuplicatas(products_fetched[i])) geraCamposId(products_fetched[i])
 	}
 	adicionaOuRemoveTextoNenhumProduto()
 }
