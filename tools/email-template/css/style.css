@@ -96,6 +96,12 @@
 .contem-erros{
 	display: block;
 }
+.absolute-center{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+}
 .close-button{
     position: absolute;
     top: -3px;
@@ -110,6 +116,7 @@
 	max-width: 1340px;
 	padding: 15px;
 	margin: auto;
+	position: relative;
 }
 .container-main > *{
 	margin-bottom: 15px;

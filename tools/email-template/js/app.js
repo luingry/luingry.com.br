@@ -69,7 +69,7 @@ $("#id-produto-inserir").keyup(function(e){
 
 $(".container-erros").on("click", function(e){
 	if ($(e.target).hasClass("close-button")){
-		limpaErros()
+		limpaErros("force")
 	}
 })
 
@@ -77,12 +77,13 @@ function carregaEstilos(){
 
 }
 
-function limpaErros(){
+function limpaErros(mode){
 	var elemento = $(".container-erros ul")
 	if ($(".invalido").length == 0){
 		$(elemento).html("")
 		$(elemento).parent(".container-erros").removeClass("contem-erros");
 	}
+	if (mode == "force") $(elemento).parent(".container-erros").removeClass("contem-erros")
 		
 }
 
@@ -255,10 +256,11 @@ function adicionaErroAoProdutoBuscado(idbuscado){
 	}
 	if (idbuscado > 0){
 		$("input.id-produto." + idbuscado).parent(".id-produto").addClass("invalido");
+
+	}
 		$(".container-erros").find("ul").html("");
 		$(".container-erros").addClass("contem-erros");
 		$(".container-erros").find("ul").append(blocoerro);
-	}
 }
 
 function salvaInformacoesNasVariaveisLocal(){
