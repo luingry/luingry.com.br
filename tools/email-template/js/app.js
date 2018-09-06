@@ -20,7 +20,7 @@ $("#produtos").on("click", function(e){
 $(".save").on("click", function(e){
 	e.preventDefault();
 	if ($(e.target).hasClass("save")) {
-		salvaInformacoesNasVariaveisLocal()
+		showTemplateNameModal();
 	}
 })
 $(".load").on("click", function(e){
@@ -50,6 +50,14 @@ $(".gerar").on("click", function(){
 	}
 });
 
+$(".backdrop").on("click", function(){
+	hideTemplateNameModal();
+})
+
+$(".template-name-container").on("click", function(e){
+	if( $(e.target).hasClass("save") ) salvaInformacoesNasVariaveisLocal()
+	if( $(e.target).hasClass("close-button") ) hideTemplateNameModal();
+})
 $("#id-produto-inserir").keyup(function(e){
 	e.preventDefault();
 	validaCharInput(this.value, this, /[0-9]/);
@@ -279,6 +287,7 @@ function salvaInformacoesNasVariaveisLocal(){
 	];
 
 	localStorage.setItem("template_e-mail", JSON.stringify(template));
+	hideTemplateNameModal();
 }
 
 function carregaUltimasInformacoesSalvas(){
@@ -295,4 +304,19 @@ function carregaUltimasInformacoesSalvas(){
 		if (!verificaDuplicatas(products_fetched[i])) geraCamposId(products_fetched[i])
 	}
 	adicionaOuRemoveTextoNenhumProduto()
+}
+
+function showTemplateNameModal(){
+	$(".backdrop").removeClass("hidden").animate({opacity: 1}, 100, "linear");
+	$(".template-name-container").removeClass("hidden").animate({opacity: 1}, 100, "linear");
+
+}
+
+function hideTemplateNameModal(){
+	$(".template-name-container").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	})
+	$(".backdrop").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	})	
 }
