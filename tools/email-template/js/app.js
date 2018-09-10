@@ -20,7 +20,7 @@ $("#produtos").on("click", function(e){
 $(".save").on("click", function(e){
 	e.preventDefault();
 	if ($(e.target).hasClass("save")) {
-		salvaInformacoesNasVariaveisLocal()
+		showTemplateNameModal();
 	}
 })
 $(".load").on("click", function(e){
@@ -40,7 +40,7 @@ $("#email-width").keyup(function(e){
 	
 })
 $(".gerar").on("click", function(){
-	if ($(".fieldset-ids>div.id-produto").length == 0) alert("Insira pelo menos 1 id para gerar o template.")
+	if ($(".fieldset-ids>div.id-produto").length == 0) showErrorModal("Insira pelo menos 1 id para gerar o template.", "error")
 	else{
 		limpaPrevia();
 		consultaAPIeRenderiza(coletaIds());
@@ -50,6 +50,17 @@ $(".gerar").on("click", function(){
 	}
 });
 
+$(".backdrop").on("click", function(){
+	hideTemplateNameModal();
+	hideErrorModal();
+});
+
+	//VERIFICAR ONDE COLOCAR ESTA LINHA if( $(e.target).hasClass("save") ) salvaInformacoesNasVariaveisLocal()
+
+$(".close-button").on("click", function(e){
+	if( $(e.target).hasClass("close-button") ) closeModal($(e.target));
+});
+
 $("#id-produto-inserir").keyup(function(e){
 	e.preventDefault();
 	validaCharInput(this.value, this, /[0-9]/);
@@ -57,12 +68,11 @@ $("#id-produto-inserir").keyup(function(e){
 		var id = this.value;
 		if (id.length > 0) {
 			if (!verificaDuplicatas(id)) geraCamposId(id);
-			else alert("ID repetido")
 			adicionaOuRemoveTextoNenhumProduto()
 
 		}
 		else{
-			alert("Insira um ID")
+			showErrorModal("Insira um ID", "error")
 		}
 		$(this).val('')
 	}
@@ -70,20 +80,21 @@ $("#id-produto-inserir").keyup(function(e){
 
 $(".container-erros").on("click", function(e){
 	if ($(e.target).hasClass("close-button")){
-		limpaErros()
+		limpaErros("force")
 	}
-})
+});
 
 function carregaEstilos(){
 
 }
 
-function limpaErros(){
+function limpaErros(mode){
 	var elemento = $(".container-erros ul")
 	if ($(".invalido").length == 0){
 		$(elemento).html("")
 		$(elemento).parent(".container-erros").removeClass("contem-erros");
 	}
+	if (mode == "force") $(elemento).parent(".container-erros").removeClass("contem-erros")
 		
 }
 
@@ -140,6 +151,7 @@ function verificaDuplicatas(id){
 		for (var i = 0; i < arrayid.length; i++) {
 			if (arrayid[i] == id) {
 				repetido = true;
+				showErrorModal("ID repetido", "error")
 				return repetido;
 				break
 			}
@@ -245,20 +257,16 @@ function verificaWidth(width){
 }
 
 function adicionaErroAoProdutoBuscado(idbuscado){
-	var blocoerro = $("<li>").addClass("mensagem-erro").html("<span>Os IDs destacados em vermelho não foram encontrados por algum dos seguintes motivos: <br><b>1</b> - ID inválido<br><b>2</b> - Produto sem estoque<br><b>3</b> - Produto inativo</span>");
+	showErrorModal("<span>Os IDs destacados em vermelho não foram encontrados por algum dos seguintes motivos: <br><b>1</b> - ID inválido<br><b>2</b> - Produto sem estoque<br><b>3</b> - Produto inativo</span>", "error");
 
 	if (idbuscado == 0){
 		$("input.id-produto").parent("div.id-produto").addClass("invalido")
-		$(".container-erros").find("ul").html("");
-		$(".container-erros").addClass("contem-erros");
-		$(".container-erros").find("ul").append(blocoerro);
 	}
 	if (idbuscado > 0){
 		$("input.id-produto." + idbuscado).parent(".id-produto").addClass("invalido");
-		$(".container-erros").find("ul").html("");
-		$(".container-erros").addClass("contem-erros");
-		$(".container-erros").find("ul").append(blocoerro);
+
 	}
+
 }
 
 function salvaInformacoesNasVariaveisLocal(){
@@ -277,9 +285,12 @@ function salvaInformacoesNasVariaveisLocal(){
 	];
 
 	localStorage.setItem("template_e-mail", JSON.stringify(template));
+	hideTemplateNameModal();
 }
 
 function carregaUltimasInformacoesSalvas(){
+	$(".fieldset-ids").html("");
+	limpaErros()
 	var response = JSON.parse(localStorage.getItem("template_e-mail"))[0];
 	var configs = response.configs;
 	var produtos = response.configs.produtos;
@@ -288,7 +299,55 @@ function carregaUltimasInformacoesSalvas(){
 	$(".previa table").css({width: verificaWidth(configs.width), margin: "auto"})
 	$("div.previa tr.produtos").html(produtos)
 	for(var i = 0; i < products_fetched.length; i++){
-		geraCamposId(products_fetched[i])
+		if (!verificaDuplicatas(products_fetched[i])) geraCamposId(products_fetched[i])
 	}
 	adicionaOuRemoveTextoNenhumProduto()
+}
+
+function showTemplateNameModal(){
+	$(".backdrop").removeClass("hidden").animate({opacity: 1}, 100, "linear");
+	$(".template-name-container").removeClass("hidden").animate({opacity: 1}, 100, "linear");
+
+}
+
+function hideTemplateNameModal(){
+	$(".template-name-container").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	})
+	$(".backdrop").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	})	
+}
+
+function showErrorModal(message, type){
+	var errocontainer = $(".error-message-container");
+	var messagecontentcontainer = $(errocontainer).find(".message-content");
+	$(messagecontentcontainer).html(message);
+	$(".backdrop").removeClass("hidden").animate({opacity: 1}, 100, "linear");
+	$(errocontainer).removeClass("hidden").animate({opacity: 1}, 100, "linear");
+	if (type == "warning") $(errocontainer).addClass("warning");
+	if (type == "error") $(errocontainer).addClass("error");
+}
+
+function hideErrorModal(){
+	$(".error-message-container").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden");
+		$(this).find(".message-content").html("");
+		$(this).removeClass("warning");
+		$(this).removeClass("error");
+	});
+	$(".backdrop").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	});
+}
+
+function closeModal(closebutton){
+	$(closebutton).parent().removeClass("warning");
+	$(closebutton).parent().removeClass("error");
+	$(closebutton).parent().animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	})
+	$(".backdrop").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	})
 }
