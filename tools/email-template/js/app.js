@@ -40,7 +40,7 @@ $("#email-width").keyup(function(e){
 	
 })
 $(".gerar").on("click", function(){
-	if ($(".fieldset-ids>div.id-produto").length == 0) alert("Insira pelo menos 1 id para gerar o template.")
+	if ($(".fieldset-ids>div.id-produto").length == 0) showErrorModal("Insira pelo menos 1 id para gerar o template.", "error")
 	else{
 		limpaPrevia();
 		consultaAPIeRenderiza(coletaIds());
@@ -52,12 +52,15 @@ $(".gerar").on("click", function(){
 
 $(".backdrop").on("click", function(){
 	hideTemplateNameModal();
-})
+	hideErrorModal();
+});
 
-$(".template-name-container").on("click", function(e){
-	if( $(e.target).hasClass("save") ) salvaInformacoesNasVariaveisLocal()
-	if( $(e.target).hasClass("close-button") ) hideTemplateNameModal();
-})
+	//VERIFICAR ONDE COLOCAR ESTA LINHA if( $(e.target).hasClass("save") ) salvaInformacoesNasVariaveisLocal()
+
+$(".close-button").on("click", function(e){
+	if( $(e.target).hasClass("close-button") ) closeModal($(e.target));
+});
+
 $("#id-produto-inserir").keyup(function(e){
 	e.preventDefault();
 	validaCharInput(this.value, this, /[0-9]/);
@@ -69,7 +72,7 @@ $("#id-produto-inserir").keyup(function(e){
 
 		}
 		else{
-			alert("Insira um ID")
+			showErrorModal("Insira um ID", "error")
 		}
 		$(this).val('')
 	}
@@ -79,7 +82,7 @@ $(".container-erros").on("click", function(e){
 	if ($(e.target).hasClass("close-button")){
 		limpaErros("force")
 	}
-})
+});
 
 function carregaEstilos(){
 
@@ -148,7 +151,7 @@ function verificaDuplicatas(id){
 		for (var i = 0; i < arrayid.length; i++) {
 			if (arrayid[i] == id) {
 				repetido = true;
-				alert("ID repetido")
+				showErrorModal("ID repetido", "error")
 				return repetido;
 				break
 			}
@@ -254,21 +257,16 @@ function verificaWidth(width){
 }
 
 function adicionaErroAoProdutoBuscado(idbuscado){
-	var blocoerro = $("<li>").addClass("mensagem-erro").html("<span>Os IDs destacados em vermelho não foram encontrados por algum dos seguintes motivos: <br><b>1</b> - ID inválido<br><b>2</b> - Produto sem estoque<br><b>3</b> - Produto inativo</span>");
+	showErrorModal("<span>Os IDs destacados em vermelho não foram encontrados por algum dos seguintes motivos: <br><b>1</b> - ID inválido<br><b>2</b> - Produto sem estoque<br><b>3</b> - Produto inativo</span>", "error");
 
 	if (idbuscado == 0){
 		$("input.id-produto").parent("div.id-produto").addClass("invalido")
-		$(".container-erros").find("ul").html("");
-		$(".container-erros").addClass("contem-erros");
-		$(".container-erros").find("ul").append(blocoerro);
 	}
 	if (idbuscado > 0){
 		$("input.id-produto." + idbuscado).parent(".id-produto").addClass("invalido");
 
 	}
-		$(".container-erros").find("ul").html("");
-		$(".container-erros").addClass("contem-erros");
-		$(".container-erros").find("ul").append(blocoerro);
+
 }
 
 function salvaInformacoesNasVariaveisLocal(){
@@ -319,4 +317,37 @@ function hideTemplateNameModal(){
 	$(".backdrop").animate({opacity: 0}, 200, "linear", function(e){
 		$(this).addClass("hidden")
 	})	
+}
+
+function showErrorModal(message, type){
+	var errocontainer = $(".error-message-container");
+	var messagecontentcontainer = $(errocontainer).find(".message-content");
+	$(messagecontentcontainer).html(message);
+	$(".backdrop").removeClass("hidden").animate({opacity: 1}, 100, "linear");
+	$(errocontainer).removeClass("hidden").animate({opacity: 1}, 100, "linear");
+	if (type == "warning") $(errocontainer).addClass("warning");
+	if (type == "error") $(errocontainer).addClass("error");
+}
+
+function hideErrorModal(){
+	$(".error-message-container").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden");
+		$(this).find(".message-content").html("");
+		$(this).removeClass("warning");
+		$(this).removeClass("error");
+	});
+	$(".backdrop").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	});
+}
+
+function closeModal(closebutton){
+	$(closebutton).parent().removeClass("warning");
+	$(closebutton).parent().removeClass("error");
+	$(closebutton).parent().animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	})
+	$(".backdrop").animate({opacity: 0}, 200, "linear", function(e){
+		$(this).addClass("hidden")
+	})
 }
