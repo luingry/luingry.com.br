@@ -2,12 +2,10 @@
 <html>
 <head>
 	<title>Criador de html</title>
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-  <link href="css/style.css" rel="stylesheet"></link>
-  <meta charset="UTF-8">
+	<script src="js/jquery.min.js"></script>
+	<link href="css/style.css" rel="stylesheet"></link>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<meta charset="UTF-8">
 </head>
 <body>
 	<div class="template-name-container absolute-center hidden hidden-opacity">
@@ -34,16 +32,16 @@
 		</div>
 		<form id="opcoes">
 			<label for="email-width">Largura do e-mail:</label>
-			<input type="text" id="email-width">
+			<input type="text" id="email-width" autocomplete="off">
 		</form>
 
 		<form id="produtos">
 			<label for="id-produto-inserir">Insira o ID do produto e tecle enter:</label>
-			<input type="text" id="id-produto-inserir">
+			<input type="text" id="id-produto-inserir" autocomplete="off">
 			<p>Produtos selecionados:</p>
-			<div class="fieldset-ids">
+			<ul class="fieldset-ids">
 				
-			</div>
+			</ul>
 		</form>
 
 		<div class="previa">
@@ -58,6 +56,7 @@
 		</div>
 	</div>
 
+<script src="js/jquery-ui.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

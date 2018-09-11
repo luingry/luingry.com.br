@@ -40,7 +40,7 @@ $("#email-width").keyup(function(e){
 	
 })
 $(".gerar").on("click", function(){
-	if ($(".fieldset-ids>div.id-produto").length == 0) showErrorModal("Insira pelo menos 1 id para gerar o template.", "error")
+	if ($(".fieldset-ids>li.id-produto").length == 0) showErrorModal("Insira pelo menos 1 id para gerar o template.", "error")
 	else{
 		limpaPrevia();
 		consultaAPIeRenderiza(coletaIds());
@@ -99,10 +99,10 @@ function limpaErros(mode){
 }
 
 function adicionaOuRemoveTextoNenhumProduto(){
-	if ($(".fieldset-ids").find("input").length == 0){
-		$(".fieldset-ids").append($("<span>").html("Nenhum produto selecionado"))
+	if ($(".fieldset-ids").find(".input").length == 0){
+		$(".fieldset-ids").append($("<span>").html("Nenhum produto selecionado"));
 	}else{
-		$(".fieldset-ids span").remove()	
+		$(".fieldset-ids>span").remove();
 	}
 }
 
@@ -141,12 +141,12 @@ function limpaPrevia(){
 function verificaDuplicatas(id){
 	var arrayid = [];
 	var repetido = false;
-	if ( $("input.id-produto").length == 0 ) {
+	if ( $(".input.id-produto").length == 0 ) {
 		return repetido
 	}
 	else{
-		$("input.id-produto").each(function(){
-			arrayid.push(this.value)
+		$(".input.id-produto").each(function(){
+			arrayid.push($(this).text())
 		})
 		for (var i = 0; i < arrayid.length; i++) {
 			if (arrayid[i] == id) {
@@ -162,23 +162,29 @@ function verificaDuplicatas(id){
 
 function geraCamposId(id){
 	var fieldsetids = $(".fieldset-ids");
-	var inputtextid = $("<input disabled>").attr("type", "text").attr({id: "id-produto " + id, class:  "input id-produto " + id});
-	var botaoremover = $("<div>").attr("class",  "botao-remover id-produto " + id);
-	var blocoproduto = $("<div>").attr("class", "id-produto " + id)
+	var inputtextid = $("<span>").attr({id: "id-produto " + id, class: "input id-produto " + id});
+
+	var botaoremover = $("<div>").attr("class",  "botao-remover id-produto " + id).html('<i class="far fa-trash-alt"></i>');
+	var blocoproduto = $("<li>").attr("class", "id-produto " + id)
 	
 	blocoproduto.append(inputtextid);
 	blocoproduto.append(botaoremover);
 	fieldsetids.append(blocoproduto);
-	inputtextid.val(id)
+	inputtextid.html(id);
+	enableSorting();
 
+}
+
+function enableSorting(){
+	$(".fieldset-ids").sortable();
 }
 
 function coletaIds(){
 	var idsprodutos = [];
-	inputidproduto = $(".id-produto");
+	inputidproduto = $(".input.id-produto");
 	inputidproduto.each(function(){
-		if( this.value > 0 ){
-			idsprodutos.push(this.value);
+		if( $(this).text() > 0 ){
+			idsprodutos.push($(this).text());
 		}
 	})
 	return String(idsprodutos);
@@ -219,12 +225,12 @@ function adicionaProdutoNaPrevia(produto){
 }
 
 function verificaSeProdutoRetornouNaConsulta(produtos){
-	var inputsbuscados = $("input.id-produto");
+	var inputsbuscados = $(".input.id-produto");
 	var idsbuscados = [];
 	var produtosnaoencontrados = [];
 	
 	for (var i = 0; i < inputsbuscados.length; i++) {
-		idsbuscados.push(inputsbuscados[i].value);
+		idsbuscados.push($(inputsbuscados[i]).text());
 	}
 	for (var i = 0; i < idsbuscados.length; i++) {
 		window.idnaoencontrado = true;
@@ -260,10 +266,10 @@ function adicionaErroAoProdutoBuscado(idbuscado){
 	showErrorModal("<span>Os IDs destacados em vermelho não foram encontrados por algum dos seguintes motivos: <br><b>1</b> - ID inválido<br><b>2</b> - Produto sem estoque<br><b>3</b> - Produto inativo</span>", "error");
 
 	if (idbuscado == 0){
-		$("input.id-produto").parent("div.id-produto").addClass("invalido")
+		$(".input.id-produto").parent("li.id-produto").addClass("invalido");
 	}
 	if (idbuscado > 0){
-		$("input.id-produto." + idbuscado).parent(".id-produto").addClass("invalido");
+		$(".input.id-produto." + idbuscado).parent(".id-produto").addClass("invalido");
 
 	}
 
@@ -271,8 +277,8 @@ function adicionaErroAoProdutoBuscado(idbuscado){
 
 function salvaInformacoesNasVariaveisLocal(){
 	var products_fetched = [];
-	for (var i = 0; i < $("input.id-produto").length; i++) {
-		products_fetched.push($("input.id-produto")[i].value)
+	for (var i = 0; i < $(".input.id-produto").length; i++) {
+		products_fetched.push($(".input.id-produto")[i].text())
 	}
 	var template = [
 		{
