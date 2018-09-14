@@ -8,10 +8,10 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	<div class="template-name-container absolute-center hidden hidden-opacity">
+	<div class="template-name-modal absolute-center hidden hidden-opacity">
 		<label for="template-name">Insira o nome do template:</label>
 		<input type="text" class="template-name" id="template-name">
-		<div class="button save">Salvar</div>
+		<div class="button save">Salvar <i class="fas fa-save"></i></div>
 		<div class="close-button">x</div>
 	</div>
 	<div class="error-message-container absolute-center hidden hidden-opacity">
@@ -21,10 +21,11 @@
 	<div class="backdrop hidden hidden-opacity"></div>
 	<div class="container-main">
 		<div class="acoes">
-			<div class="gerar button">Gerar HTML</div>
-			<div class="remover-todos button">Remover todos os produtos</div>
-			<div class="save button">Salvar</div>
-			<div class="load button">Carregar</div>
+			<div class="gerar button">Gerar HTML <i class="fas fa-file"></i></div>
+			<div class="remover-todos button">Remover todos os produtos <i class="fas fa-trash-alt"></i></div>
+			<div class="show-save-dialog button">Salvar <i class="fas fa-save"></i></div>
+			<div class="load button">Carregar <i class="fas fa-download"></i></div>
+			<div class="template-name-loaded"></div>
 		</div>
 		<div class="container-erros">
 			<ul></ul>

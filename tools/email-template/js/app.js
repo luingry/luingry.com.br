@@ -17,28 +17,30 @@ $("#produtos").on("click", function(e){
 	if ($(e.target).hasClass("botao-remover")) limpaErros();
 });
 
-$(".save").on("click", function(e){
+$(".show-save-dialog").on("click", function(e){
 	e.preventDefault();
-	if ($(e.target).hasClass("save")) {
-		showTemplateNameModal();
-	}
-})
+	showTemplateNameModal();
+});
+$(".template-name-modal").on("click", function(e){
+	if ($(e.target).hasClass("save")) salvaInformacoesNasVariaveisLocal();
+
+});
 $(".load").on("click", function(e){
 	e.preventDefault();
 	if ($(e.target).hasClass("load")) {
 		carregaUltimasInformacoesSalvas()
 	}
-})
+});
 $(".remover-todos").on("click", function(e){
 	e.preventDefault();
 	$(".fieldset-ids").children().remove();
 	adicionaOuRemoveTextoNenhumProduto()
-})
+});
 $("#email-width").keyup(function(e){
 	validaCharInput(this.value, this, /[0-9]/)
 	
 	
-})
+});
 $(".gerar").on("click", function(){
 	if ($(".fieldset-ids>li.id-produto").length == 0) showErrorModal("Insira pelo menos 1 id para gerar o template.", "error")
 	else{
@@ -176,7 +178,11 @@ function geraCamposId(id){
 }
 
 function enableSorting(){
-	$(".fieldset-ids").sortable();
+	$(".fieldset-ids").sortable({
+		containment: "parent",
+		grid: [145.282, 1],
+		tolerance: "pointer"
+	});
 }
 
 function coletaIds(){
@@ -188,6 +194,7 @@ function coletaIds(){
 		}
 	})
 	return String(idsprodutos);
+
 };
 
 function consultaAPIeRenderiza(idsprodutos){
@@ -200,8 +207,12 @@ function consultaAPIeRenderiza(idsprodutos){
 		if (produtos.length == 0){
 			adicionaErroAoProdutoBuscado(0)
 		}else{
-			for (var i = 0; i < produtos.length; i++) {
-				adicionaProdutoNaPrevia(produtos[i].Product)
+			var idsprodutosparsed = JSON.parse("[" + idsprodutos + "]");
+			for (var a = 0; a < idsprodutosparsed.length; a++){
+				for (var i = 0; i < produtos.length; i++) {
+
+					if (idsprodutosparsed[a] == produtos[i].Product.id) adicionaProdutoNaPrevia(produtos[i].Product)
+				}
 			}
 			verificaSeProdutoRetornouNaConsulta(produtos)
 		}
@@ -278,11 +289,12 @@ function adicionaErroAoProdutoBuscado(idbuscado){
 function salvaInformacoesNasVariaveisLocal(){
 	var products_fetched = [];
 	for (var i = 0; i < $(".input.id-produto").length; i++) {
-		products_fetched.push($(".input.id-produto")[i].text())
-	}
+		products_fetched.push($($(".input.id-produto")[i]).text());
+	};
 	var template = [
 		{
 			"configs": {
+			"template_name": $("#template-name").val(),
 			"width": $("#email-width").val() == 0 ? "default" : $("#email-width").val(),
 			"products_returned": $("div.previa tr.produtos").html(),
 			"products_fetched": products_fetched
@@ -299,8 +311,10 @@ function carregaUltimasInformacoesSalvas(){
 	limpaErros()
 	var response = JSON.parse(localStorage.getItem("template_e-mail"))[0];
 	var configs = response.configs;
-	var produtos = response.configs.produtos;
-	var products_fetched = response.configs.products_fetched
+	var produtos = configs.produtos;
+	var products_fetched = configs.products_fetched;
+	var templatename = configs.template_name;
+	$(".template-name-loaded").html(templatename);
 	$("#email-width").val(verificaWidth(configs.width));
 	$(".previa table").css({width: verificaWidth(configs.width), margin: "auto"})
 	$("div.previa tr.produtos").html(produtos)
@@ -312,12 +326,11 @@ function carregaUltimasInformacoesSalvas(){
 
 function showTemplateNameModal(){
 	$(".backdrop").removeClass("hidden").animate({opacity: 1}, 100, "linear");
-	$(".template-name-container").removeClass("hidden").animate({opacity: 1}, 100, "linear");
-
+	$(".template-name-modal").removeClass("hidden").animate({opacity: 1}, 100, "linear");
 }
 
 function hideTemplateNameModal(){
-	$(".template-name-container").animate({opacity: 0}, 200, "linear", function(e){
+	$(".template-name-modal").animate({opacity: 0}, 200, "linear", function(e){
 		$(this).addClass("hidden")
 	})
 	$(".backdrop").animate({opacity: 0}, 200, "linear", function(e){

@@ -36,6 +36,11 @@
 	border-bottom: 0px;
 	margin-bottom: 3px !important;
 }
+.template-name-loaded{
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+}
 .botao-remover{
 	width: 30px;
 	height: 30px;
@@ -70,16 +75,16 @@
 .fieldset-ids>.id-produto{
 	display: flex;
 	border-radius: 10px;
-	margin: 1%;
+	margin: 0.85%;
 	max-height: 32px;
 }
-#id-produto-inserir, #opcoes input, .template-name-container input{
+#id-produto-inserir, #opcoes input, .template-name-modal input{
 	border: 0;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     width: 90px;
     text-align: right;
 }
-#id-produto-inserir:focus, #opcoes input:focus,  .template-name-container input:focus{
+#id-produto-inserir:focus, #opcoes input:focus,  .template-name-modal input:focus{
 	outline: none;
 	border-bottom: 1px solid #5b7eb1
 }
@@ -90,6 +95,9 @@
 }
 .acoes{
 	margin-bottom: 20px;
+}
+i{
+	color: inherit;
 }
 .invalido {
     background-color: rgba(255,0,0,0.3);
@@ -145,11 +153,14 @@
     right: 3%;
     padding: 1%;
     font-weight: 700;
-    color: red;
+    color: rgba(0, 0, 0, 0.5);
     cursor: pointer;
     opacity: 0.5;
 }
-.template-name-container.absolute-center .button.save{
+.close-button:hover{
+	color: red;
+}
+.template-name-modal.absolute-center .button.save{
 	margin: 0
 }
 .container-main{
@@ -161,7 +172,7 @@
 .container-main > *{
 	margin-bottom: 15px;
 }
-.template-name-container{
+.template-name-modal{
     padding: 50px;
     width: 300px;
     box-shadow: 0 0 10px;
@@ -173,14 +184,14 @@
     z-index: 2;
     background-color: white;
 }
- .template-name-container input{
+ .template-name-modal input{
  	width: 100%;
  	text-align: left;
  }
- .template-name-container.absolute-center > * {
+ .template-name-modal.absolute-center > * {
     margin: 20px;
 }
-.template-name-container.absolute-center > .close-button{
+.template-name-modal.absolute-center > .close-button{
 	margin: 0;
 }
 div.mais-produtos{
@@ -210,9 +221,11 @@ input:focus{
 input#show-all{
 	display: none;
 }
-*{
+*, *:hover{
 	font-family: sans-serif;
 	transition: 100ms ease-in-out;
+}
+*{
 	color: rgb(84, 84, 84);
 }
 body{
