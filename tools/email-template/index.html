@@ -6,6 +6,8 @@
 	<link href="css/style.css" rel="stylesheet"></link>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<meta charset="UTF-8">
+	<link rel="stylesheet" media="screen" type="text/css" href="css/colorpicker.css" />
+	
 </head>
 <body>
 	<div class="template-name-modal absolute-center hidden hidden-opacity">
@@ -25,20 +27,31 @@
 			<div class="remover-todos button">Remover todos os produtos <i class="fas fa-trash-alt"></i></div>
 			<div class="show-save-dialog button">Salvar <i class="fas fa-save"></i></div>
 			<div class="load button">Carregar <i class="fas fa-download"></i></div>
+			<div class="show-configs button">Configurações <i class="fas fa-cog"></i></div>
 			<div class="template-name-loaded"></div>
 		</div>
 		<div class="container-erros">
 			<ul></ul>
 			<div class="close-button">x</div>
 		</div>
-		<form id="opcoes">
-			<label for="email-width">Largura do e-mail:</label>
-			<input type="text" id="email-width" autocomplete="off">
+		<form id="opcoes" class="hidden-height">
+			<div>
+				<span class="input-label-container">
+					<input type="text" id="email-width" autocomplete="off" placeholder="Ex: 700">
+					<label for="email-width">Largura do e-mail (em px)</label>
+				</span>
+				<span class="input-label-container">
+					<input type="text" id="theme-color" autocomplete="off" placeholder="Ex: #32AA7B">
+					<label for="theme-color">Cor do Tema</label>
+				</span>
+			</div>
 		</form>
 
 		<form id="produtos">
-			<label for="id-produto-inserir">Insira o ID do produto e tecle enter:</label>
-			<input type="text" id="id-produto-inserir" autocomplete="off">
+			<span class="input-label-container">
+				<input type="text" id="id-produto-inserir" autocomplete="off" placeholder="Insira e pressione enter">
+				<label for="id-produto-inserir">Insira o ID do produto</label>
+			</span>
 			<p>Produtos selecionados:</p>
 			<ul class="fieldset-ids">
 				
@@ -46,18 +59,21 @@
 		</form>
 
 		<div class="previa">
-			<table>
-				<tbody>
-					<tr class="cabecalho"></tr>
-					<tr class="produtos"></tr>
-					<tr class="rodape"></tr>
-				</tbody>
-			</table>
+			<div>
+				<table>
+					<tbody>
+						<tr class="cabecalho"></tr>
+						<tr class="produtos"></tr>
+						<tr class="rodape"></tr>
+					</tbody>
+				</table>
+			</div>
 			
 		</div>
 	</div>
 
-<script src="js/jquery-ui.js"></script>
-<script src="js/app.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script src="js/app.js"></script>
+	<script type="text/javascript" src="js/colorpicker.js"></script>
 </body>
 </html>

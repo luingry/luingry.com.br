@@ -17,6 +17,10 @@
 .hidden-opacity{
 	opacity: 0;
 }
+.hidden-height{
+	height: 0;
+	overflow: hidden;
+}
 .button{
 	display: inline-block;
     background-color: gray;
@@ -58,6 +62,16 @@
  	height: 100%;
 
 }
+#opcoes{
+	margin: 0;
+}
+#opcoes>div{
+	border-radius: 10px;
+	display: flex;
+}
+#opcoes>div>*{
+	margin-right: 15px;
+}
 .botao-remover>i{
 	color: red;
 	opacity: 0.3;
@@ -80,13 +94,19 @@
 }
 #id-produto-inserir, #opcoes input, .template-name-modal input{
 	border: 0;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    width: 90px;
-    text-align: right;
+	border-bottom: 0px solid rgba(0, 0, 0, 0.2);
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
 }
 #id-produto-inserir:focus, #opcoes input:focus,  .template-name-modal input:focus{
 	outline: none;
-	border-bottom: 1px solid #5b7eb1
+	border-bottom: 0;
+}
+#opcoes .colorpicker input{
+	transform: unset;
+	width: unset;
+
 }
 .imagem-produto{
 	max-height: 200px;
@@ -99,6 +119,46 @@
 i{
 	color: inherit;
 }
+.input-label-container {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    justify-content: center;
+    position: relative;
+}
+.input-label-container label{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(229, 229, 229);
+    user-select: none;
+    border-radius: 10px
+}
+.input-label-container.colorpicker-active input ~ label, .input-label-container.has-value input ~ label,.input-label-container input:focus ~ label, .input-label-container:hover label{
+	transform: translateY(-50%);
+	height: 50%;
+    border-radius: 10px 10px 0 0;
+    font-size: 0.9em;
+    cursor: text;
+}
+::placeholder{
+	opacity: 0.5
+}
+.input-label-container input{
+	opacity: 0;
+	height: 50%
+}
+.input-label-container.colorpicker-active input, .input-label-container.has-value input, .input-label-container input:focus, .input-label-container:hover input{
+	transform: translateY(50%);
+	opacity: 1
+}
 .invalido {
     background-color: rgba(255,0,0,0.3);
     box-shadow: 0 0 10px red;
@@ -110,6 +170,12 @@ i{
     padding: 1%;
     display: none;
     position: relative;
+}
+.titulo-produto{
+	text-align: center;
+}
+.valid-input{
+	background-color: rgba(0, 255, 0, 0.1);
 }
 .error-message-container{
     padding: 50px;
@@ -169,7 +235,7 @@ i{
 	margin: auto;
 	position: relative;
 }
-.container-main > *{
+.container-main > *, #opcoes>*{
 	margin-bottom: 15px;
 }
 .template-name-modal{
@@ -215,11 +281,14 @@ div.mais-produtos{
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 input:focus{
-    border-bottom: 1px;
+    border-bottom: 0;
 	border-color: #5b7eb1;
 }
 input#show-all{
 	display: none;
+}
+input{
+	box-sizing: border-box;
 }
 *, *:hover{
 	font-family: sans-serif;
@@ -231,4 +300,10 @@ input#show-all{
 body{
 	margin: 0;
 	overflow: hidden;
+}
+
+.colorpicker{
+    position: absolute !important;
+    left: 100% !important;
+    top: 100% !important;
 }

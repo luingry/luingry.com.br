@@ -36,11 +36,31 @@ $(".remover-todos").on("click", function(e){
 	$(".fieldset-ids").children().remove();
 	adicionaOuRemoveTextoNenhumProduto()
 });
+
 $("#email-width").keyup(function(e){
 	validaCharInput(this.value, this, /[0-9]/)
-	
-	
+	if( e.keyCode == 13){
+		$(this).blur()
+	}
 });
+
+$(".show-configs").on("click", function(){
+	var heightbase = parseInt($("#opcoes>div").css("height"));
+	var marginbase = parseInt($("#opcoes>div").css("margin-bottom"));
+	var paddingbase = parseInt($("#opcoes>div").css("padding"))*2;
+	var heightoptions = parseInt($("#opcoes").css("height"));
+	if (heightoptions > 0) $("#opcoes").animate({height: 0}, 100, "linear", function(){
+		setTimeout(function(){
+			$("#opcoes").addClass("hidden-height")
+		}, 200)
+	})
+	else $("#opcoes").animate({height: heightbase + marginbase + paddingbase}, 100, "linear", function(){
+		setTimeout(function(){
+			$("#opcoes").removeClass("hidden-height")
+		}, 200)
+	})
+});
+
 $(".gerar").on("click", function(){
 	if ($(".fieldset-ids>li.id-produto").length == 0) showErrorModal("Insira pelo menos 1 id para gerar o template.", "error")
 	else{
@@ -52,12 +72,15 @@ $(".gerar").on("click", function(){
 	}
 });
 
+$(".input-label-container input").keydown(updateText);
+$(".input-label-container input").change(updateText);
+
 $(".backdrop").on("click", function(){
 	hideTemplateNameModal();
 	hideErrorModal();
 });
 
-	//VERIFICAR ONDE COLOCAR ESTA LINHA if( $(e.target).hasClass("save") ) salvaInformacoesNasVariaveisLocal()
+
 
 $(".close-button").on("click", function(e){
 	if( $(e.target).hasClass("close-button") ) closeModal($(e.target));
@@ -86,6 +109,27 @@ $(".container-erros").on("click", function(e){
 	}
 });
 
+$("#theme-color").on("click", function(e){
+	e.stopPropagation();
+	$(this).parent(".input-label-container").ColorPicker({flat: true})
+	$(this).parent().addClass("colorpicker-active");
+	$(".colorpicker").show();
+})
+
+$(".colorpicker-active").on("click", function(e){
+	e.stopPropagation();
+});
+
+$(".colorpicker").on("click", function(e){
+	e.stopPropagation();
+})
+$(window).on("click", function(e){
+	if ($(e.target).parents(".colorpicker-active").length == 0){
+		$(".colorpicker").hide();
+		$(".colorpicker-active").removeClass("colorpicker-active");	
+	}
+	if( $(e.target).hasClass("save") ) salvaInformacoesNasVariaveisLocal()
+})
 function carregaEstilos(){
 
 }
@@ -127,11 +171,10 @@ function validaCharInput(valordigitado, elementoinput, regex){
 }
 
 function excluiCampoID(campo){
-	if( $(campo).hasClass("botao-remover")){
+	if( $(campo).hasClass("botao-remover") || $(campo).parents().hasClass("botao-remover")){
 
 		if ($(".invalido").length == 0) limpaErros();
-		var classe = campo.attributes.class.value.split(" ");
-		$(campo).parent(".id-produto").remove();
+		$(campo).parents("li.id-produto").remove();
 		adicionaOuRemoveTextoNenhumProduto();
 	}
 }
@@ -304,6 +347,7 @@ function salvaInformacoesNasVariaveisLocal(){
 
 	localStorage.setItem("template_e-mail", JSON.stringify(template));
 	hideTemplateNameModal();
+	carregaUltimasInformacoesSalvas();
 }
 
 function carregaUltimasInformacoesSalvas(){
@@ -314,7 +358,7 @@ function carregaUltimasInformacoesSalvas(){
 	var produtos = configs.produtos;
 	var products_fetched = configs.products_fetched;
 	var templatename = configs.template_name;
-	$(".template-name-loaded").html(templatename);
+	$(".template-name-loaded").html("<span>Template atual: "+templatename+"</span>");
 	$("#email-width").val(verificaWidth(configs.width));
 	$(".previa table").css({width: verificaWidth(configs.width), margin: "auto"})
 	$("div.previa tr.produtos").html(produtos)
@@ -322,6 +366,7 @@ function carregaUltimasInformacoesSalvas(){
 		if (!verificaDuplicatas(products_fetched[i])) geraCamposId(products_fetched[i])
 	}
 	adicionaOuRemoveTextoNenhumProduto()
+	updateText($("#email-width"))
 }
 
 function showTemplateNameModal(){
@@ -370,3 +415,17 @@ function closeModal(closebutton){
 		$(this).addClass("hidden")
 	})
 }
+
+function updateText(event){
+	if ($(event).is("#email-width")) var input = $(event)
+	else var input = $(this);
+    if (!$(input).is("#id-produto-inserir")){
+	    setTimeout(function(){
+	      var val = input.val();
+	      if (val != "")
+	        input.parent().addClass("has-value");
+	      else
+	        input.parent().removeClass("has-value");
+	    },1)
+    }
+  }
