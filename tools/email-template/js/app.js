@@ -49,11 +49,7 @@ $(".show-configs").on("click", function(){
 	var marginbase = parseInt($("#opcoes>div").css("margin-bottom"));
 	var paddingbase = parseInt($("#opcoes>div").css("padding"))*2;
 	var heightoptions = parseInt($("#opcoes").css("height"));
-	if (heightoptions > 0) $("#opcoes").animate({height: 0}, 100, "linear", function(){
-		setTimeout(function(){
-			$("#opcoes").addClass("hidden-height")
-		}, 200)
-	})
+	if (heightoptions > 0) $("#opcoes").animate({height: 0}, 100, "linear").addClass("hidden-height")
 	else $("#opcoes").animate({height: heightbase + marginbase + paddingbase}, 100, "linear", function(){
 		setTimeout(function(){
 			$("#opcoes").removeClass("hidden-height")
@@ -324,9 +320,7 @@ function adicionaErroAoProdutoBuscado(idbuscado){
 	}
 	if (idbuscado > 0){
 		$(".input.id-produto." + idbuscado).parent(".id-produto").addClass("invalido");
-
 	}
-
 }
 
 function salvaInformacoesNasVariaveisLocal(){
