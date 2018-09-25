@@ -37,7 +37,7 @@ $(".remover-todos").on("click", function(e){
 	adicionaOuRemoveTextoNenhumProduto()
 });
 
-$("#email-width").keyup(function(e){
+$("#template-width").keyup(function(e){
 	validaCharInput(this.value, this, /[0-9]/)
 	if( e.keyCode == 13){
 		$(this).blur()
@@ -302,7 +302,7 @@ function verificaSeProdutoRetornouNaConsulta(produtos){
 
 function carregaOpcoes(){
 	var tabela = $(".previa table");
-	var width = $("#email-width").val();	
+	var width = $("#template-width").val();	
 	tabela.css({"width": verificaWidth(width),"margin": "0 auto"});
 }
 
@@ -332,7 +332,7 @@ function salvaInformacoesNasVariaveisLocal(){
 		{
 			"configs": {
 			"template_name": $("#template-name").val(),
-			"width": $("#email-width").val() == 0 ? "default" : $("#email-width").val(),
+			"width": $("#template-width").val() == 0 ? "default" : $("#template-width").val(),
 			"products_returned": $("div.previa tr.produtos").html(),
 			"products_fetched": products_fetched
 			},
@@ -353,14 +353,14 @@ function carregaUltimasInformacoesSalvas(){
 	var products_fetched = configs.products_fetched;
 	var templatename = configs.template_name;
 	$(".template-name-loaded").html("<span>Template atual: "+templatename+"</span>");
-	$("#email-width").val(verificaWidth(configs.width));
+	$("#template-width").val(verificaWidth(configs.width));
 	$(".previa table").css({width: verificaWidth(configs.width), margin: "auto"})
 	$("div.previa tr.produtos").html(produtos)
 	for(var i = 0; i < products_fetched.length; i++){
 		if (!verificaDuplicatas(products_fetched[i])) geraCamposId(products_fetched[i])
 	}
 	adicionaOuRemoveTextoNenhumProduto()
-	updateText($("#email-width"))
+	updateText($("#template-width"))
 }
 
 function showTemplateNameModal(){
@@ -411,7 +411,7 @@ function closeModal(closebutton){
 }
 
 function updateText(event){
-	if ($(event).is("#email-width")) var input = $(event)
+	if ($(event).is("#template-width")) var input = $(event)
 	else var input = $(this);
     if (!$(input).is("#id-produto-inserir")){
 	    setTimeout(function(){
